@@ -14,7 +14,7 @@ test("Copy an issue", async () => {
     {
       owner: "kazuma1989",
       repo: "trial-octokit",
-      issue_number: 4,
+      issue_number: 1,
     }
   );
 

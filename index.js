@@ -19,11 +19,14 @@
  * }} context
  */
 export const script = async (github, context) => {
-  const { pull_request } = context.payload;
+  const {
+    repo: { owner, repo },
+    payload: { pull_request },
+  } = context;
 
   const { data } = await github.request("POST /repos/{owner}/{repo}/issues", {
-    owner: context.repo.owner,
-    repo: context.repo.repo,
+    owner,
+    repo,
     title: `Copy of ${pull_request.title}`,
     body: `
 # original
