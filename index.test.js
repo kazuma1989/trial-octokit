@@ -1,8 +1,19 @@
 // @ts-check
 import { Octokit } from "@octokit/rest";
+import * as fs from "node:fs/promises";
 import process from "node:process";
 import test from "node:test";
 import { script } from "./index.js";
+
+test.skip("Parse front matter", async () => {
+  const issueTemplate = await fs.readFile(
+    "./.github/ISSUE_TEMPLATE/dev-team-qa.md",
+    "utf-8"
+  );
+
+  const FRONT_MATTER = /^\s*---[\s\S]*?---\s*/;
+  console.log("[" + issueTemplate.replace(FRONT_MATTER, "") + "]");
+});
 
 test("Copy an issue", async () => {
   const github = new Octokit({
